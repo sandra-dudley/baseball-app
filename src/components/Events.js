@@ -20,10 +20,17 @@ class Events extends Component {
     
   }
   componentDidMount() {
+    /*
+    * Gets fromDate from parent component
+    * and saves it as its own state variable
+    */
     this.setState({fromDate: this.props.fromDate})
     this.initialise();
   }
   componentWillReceiveProps(nextProps) {
+    /*
+    * Runs anytime the props change data
+    */
     if (nextProps.fromDate !== this.state.fromDate) {
       this.setState({ fromDate: nextProps.fromDate });
       console.log(nextProps.fromDate );
@@ -32,6 +39,9 @@ class Events extends Component {
     }
   }
   initialise () {
+    /*
+    * Connects to api
+    */
     var instance = axios.create({
       baseURL: this.state.seatgeek
     });
