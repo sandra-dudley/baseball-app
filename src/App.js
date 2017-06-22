@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Events from './components/Events';
 
 class App extends Component {

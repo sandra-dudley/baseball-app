@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Event from './Event';
+
 var axios = require('axios');
 
 
@@ -30,7 +32,9 @@ class Events extends Component {
     })
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      this.setState({allEvents:JSON.stringify(response.data)})
+      console.log(response.data.events);
+      this.setState({allEvents:Array.from(response.data.events)})
+      
       
     }.bind(this))
     .catch(function (error) {
@@ -42,7 +46,15 @@ class Events extends Component {
 
     return(
       <div>
-        Events: {this.state.allEvents}
+        Events: 
+        <ul>
+          {Array.from(this.state.allEvents).map((event, index) => {
+              return (
+              <li><Event short_title={event.short_title} key={index} /></li>
+              )
+            })
+          }
+        </ul>
       </div>
       )
   }
