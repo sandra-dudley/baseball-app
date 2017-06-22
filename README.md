@@ -13,6 +13,8 @@
 - [ ] User can save/delete their favourite event
 -  [ ] Show countdown to their next favourite event
 - [ ] UI design
+- [ ] Testing components (using Jest?)
+
 
 ## Current component structure
 App (contains the main state variables)
