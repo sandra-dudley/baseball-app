@@ -31,11 +31,7 @@ class Events extends Component {
       }
     })
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      console.log(response.data.events);
       this.setState({allEvents:Array.from(response.data.events)})
-      
-      
     }.bind(this))
     .catch(function (error) {
       console.log(error);

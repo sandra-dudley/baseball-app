@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
+import moment from 'moment';
+
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      startDate: moment()
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+ 
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+    console.log('changed date from App');
+  }
+  
   render() {
     return (
       <div className="App">
-        <ChooseDate />
+        <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
         <Events />
       </div>
     );
