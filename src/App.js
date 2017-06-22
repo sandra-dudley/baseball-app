@@ -23,8 +23,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
-        <Events />
+        <Events fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} toDate={moment(this.state.startDate).add(7, 'days').format('YYYY-MM-DD')}/>
       </div>
     );
   }

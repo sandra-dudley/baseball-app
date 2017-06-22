@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Event from './Event';
-
+import moment from 'moment';
 var axios = require('axios');
 
 
@@ -12,22 +12,31 @@ class Events extends Component {
       
       this.state = {
         allEvents:'Loading...',
-        seatgeek: seatgeek
-      }      
+        seatgeek: seatgeek,
+        fromDate:''
+      }     
       this.initialise = this.initialise.bind(this);
   }
   componentDidMount() {
+    this.setState({fromDate: this.props.fromDate})
     this.initialise();
   }
-  
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.fromTime !== this.state.fromDate) {
+      this.setState({ fromTime: nextProps.fromDate });
+      console.log(nextProps.fromDate );
+      this.initialise();
+    }
+  }
   initialise () {
     var instance = axios.create({
       baseURL: this.state.seatgeek
     });
     instance.get('',{
       params: {
-        'datetime_utc.gte': '2017-06-22',
-        'datetime_utc.lte': '2017-06-29'
+        'datetime_utc.gte': this.state.fromDate,
+        'datetime_utc.lte': this.props.toDate
       }
     })
     .then(function (response) {
@@ -42,7 +51,7 @@ class Events extends Component {
 
     return(
       <div>
-        Events: 
+        Events from {moment(this.state.fromTime).format('DD MM YY')}: 
         <ul>
           {Array.from(this.state.allEvents).map((event, index) => {
               return (
