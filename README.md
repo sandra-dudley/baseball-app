@@ -13,3 +13,23 @@
 - [ ] User can save/delete their favourite event
 -  [ ] Show countdown to their next favourite event
 - [ ] UI design
+- [ ] Testing components (using Jest?)
+
+
+## Current component structure
+App (contains the main state variables)
+|
+|_ChooseDate (form that selects the date)
+|_Events (lists all events and has functions)
+|_____Event (1 event only)
+
+## How to install on cloud9
+- Fork the repo in your github
+- Go to cloud9, create a new workspace
+- Enter a workspace name
+- Clone with SSH (found under clone or download on your repo)
+- Enter the workspace
+- Duplicate the .env.template file and call it .env
+- Enter details from seatgeek
+- Type `npm install`
+- start the server with `npm start`
