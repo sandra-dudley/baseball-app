@@ -53,7 +53,6 @@ class Events extends Component {
     })
     .then(function (response) {
       this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
-      console.log(response.data.events);
     }.bind(this))
     .catch(function (error) {
       console.log(error);
@@ -70,7 +69,7 @@ class Events extends Component {
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
-                <Event title={event.title} date={moment(event.datetime_utc).format('DD MMMM YYYY')} key={index} />
+                <Event event={event} date={moment(event.datetime_utc).format('DD MMMM YYYY')} key={index} />
                 )
 
             })

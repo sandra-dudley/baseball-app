@@ -3,8 +3,18 @@ import moment from 'moment';
 
 class Event extends Component {
   render () {
+    const event = this.props.event;    
+    const venue = this.props.event.venue ? this.props.event.venue : 'loading...';
+    const time = moment(event.datetime_local).calendar();
+
     return(
-      <li className="event-box">{this.props.title} on {this.props.date}</li>
+      <li className="event-card">
+        <h3>{this.props.event.short_title}</h3>
+        <p className="text-muted">
+          {time}<br/>
+          @{venue.name}
+        </p>
+      </li>
       )
   }
 }
