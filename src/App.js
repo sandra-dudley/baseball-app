@@ -14,6 +14,10 @@ class App extends Component {
   }
  
   handleChange(date) {
+    /*
+    ** startDate: from when the user wants to search baseball events from
+    ** This function is called from child component ChooseDate
+    */
     this.setState({
       startDate: date
     });
