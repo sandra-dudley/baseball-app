@@ -13,3 +13,10 @@
 - [ ] User can save/delete their favourite event
 -  [ ] Show countdown to their next favourite event
 - [ ] UI design
+
+## Current component structure
+App (contains the main state variables)
+|
+|_ChooseDate (form that selects the date)
+|_Events (lists all events and has functions)
+|_____Event (1 event only)
