@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Event extends Component {
   render () {
     return(
-      <li>{this.props.short_title}</li>
+      <li>{this.props.title} on {this.props.date}</li>
       )
   }
 }

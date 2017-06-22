@@ -12,11 +12,11 @@ class Events extends Component {
       
       this.state = {
         allEvents:'Loading...',
+        allEventsObject: {},
         seatgeek: seatgeek,
         fromDate:''
       }      
       this.initialise = this.initialise.bind(this);
-      this.renderEvents = this.renderEvents.bind(this);
     
   }
   componentDidMount() {
@@ -24,11 +24,11 @@ class Events extends Component {
     this.initialise();
   }
   componentWillReceiveProps(nextProps) {
-    // You don't have to do this check first, but it can help prevent an unneeded render
-    if (nextProps.fromTime !== this.state.fromDate) {
-      this.setState({ fromTime: nextProps.fromDate });
+    if (nextProps.fromDate !== this.state.fromDate) {
+      this.setState({ fromDate: nextProps.fromDate });
       console.log(nextProps.fromDate );
       this.initialise();
+      
     }
   }
   initialise () {
@@ -42,29 +42,31 @@ class Events extends Component {
       }
     })
     .then(function (response) {
-      this.setState({allEvents:Array.from(response.data.events)})
+      this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
+      console.log(response.data.events);
     }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
   }
   
-  renderEvents () {
-    let eventsArray = [];
-    Array.from(this.state.allEvents).map((event, index) => {
-              eventsArray.push(
-                <Event short_title={event.short_title} key={index} />
-              );
-            });
-    return  eventsArray;
-  }
+
   render () {
     
     return(
       <div>
-        Events from {moment(this.state.fromTime).format('DD MM YY')}: 
+        Events from {moment(this.state.fromDate).format('DD MM YY')}: 
         <ul>
-          {this.renderEvents()}
+          {
+        Array.from(this.state.allEvents).map((event, index) => {
+               return (
+                <Event title={event.title} date={moment(event.datetime_utc).format('DD MMMM YYYY')} key={index} />
+                )
+
+            })
+
+
+        }
         </ul>
       </div>
       )
