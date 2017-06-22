@@ -14,8 +14,10 @@ class Events extends Component {
         allEvents:'Loading...',
         seatgeek: seatgeek,
         fromDate:''
-      }     
+      }      
       this.initialise = this.initialise.bind(this);
+      this.renderEvents = this.renderEvents.bind(this);
+    
   }
   componentDidMount() {
     this.setState({fromDate: this.props.fromDate})
@@ -47,18 +49,22 @@ class Events extends Component {
     });
   }
   
+  renderEvents () {
+    let eventsArray = [];
+    Array.from(this.state.allEvents).map((event, index) => {
+              eventsArray.push(
+                <Event short_title={event.short_title} key={index} />
+              );
+            });
+    return  eventsArray;
+  }
   render () {
-
+    
     return(
       <div>
         Events from {moment(this.state.fromTime).format('DD MM YY')}: 
         <ul>
-          {Array.from(this.state.allEvents).map((event, index) => {
-              return (
-              <li><Event short_title={event.short_title} key={index} /></li>
-              )
-            })
-          }
+          {this.renderEvents()}
         </ul>
       </div>
       )
