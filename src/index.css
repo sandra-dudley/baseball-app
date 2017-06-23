@@ -5,7 +5,9 @@ body {
   color: #000;
   text-align: center;
 }
-
+h1{
+  margin-top:2em;
+}
 h1,h2,h3 {
   font-family: 'Teko', sans-serif;
   text-transform: uppercase;
@@ -13,7 +15,14 @@ h1,h2,h3 {
   
 }
 
-
+.calendar-section {
+  background: #375D4C;
+  padding: 2em;
+  margin-top: 1em;
+}
+.calendar-section h2 {
+  color: #FBC926 ;
+}
 .event-card {
   display: inline-block;
   width: 30%;

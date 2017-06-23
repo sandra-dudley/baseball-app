@@ -64,7 +64,7 @@ class Events extends Component {
     
     return(
       <div>
-        Events from {moment(this.state.fromDate).format('DD MM YY')}: 
+        <h1>Events </h1>
         <ul>
           {
         Array.from(this.state.allEvents).map((event, index) => {

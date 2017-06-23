@@ -15,10 +15,15 @@ class ChooseDate extends Component {
 
  
   render() {
-    return <DatePicker
+    return (
+      <div className="calendar-section">
+    <h2>Choose a date </h2>
+    <DatePicker
         selected={this.props.startDate}
         onChange={this.props.handleChange}
-    />;
+    />
+    </div>
+    );
   }
 }
 
