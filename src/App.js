@@ -3,6 +3,8 @@ import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
 import moment from 'moment';
 
+import logo from './assets/baseball-calendar.jpg';
+
 
 class App extends Component {
   constructor (props) {
@@ -27,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-
+        <div><img src={logo} alt="Logo" /></div>
         <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
         <Events fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} toDate={moment(this.state.startDate).add(7, 'days').format('YYYY-MM-DD')}/>
       </div>
