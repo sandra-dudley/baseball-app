@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import styles from './Events.css';
 
 class Event extends Component {
   render () {

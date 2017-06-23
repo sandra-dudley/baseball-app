@@ -1,0 +1,31 @@
+
+.event-card {
+  display: inline-block;
+  width: 30%;
+  border: solid 3px var(--secondary-color);
+  background: #fff;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 1em 2em;
+  transition: background 0.5s ease-in-out;
+}
+.event-card:hover {
+  background: #FBC926;
+}
+.event-time:before {
+  content: '\f017';
+  font-family: var(--icon-font);
+  color: var(--secondary-color);
+  margin-right:0.5em;
+  transition: color 0.5s ease-in-out;
+}
+.event-venue-name:before {
+  content: '\f041';
+  font-family: var(--icon-font);
+  color:  var(--secondary-color);
+  margin-right:0.5em;
+  transition: color 0.5s ease-in-out;
+}
+.event-card:hover .event-time:before, .event-card:hover .event-venue-name:before {
+  color: var(--primary-color);
+}

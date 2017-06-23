@@ -1,0 +1,9 @@
+
+.calendar-section {
+  background: var(--primary-color);
+  padding: 2em;
+  margin-top: 1em;
+}
+.calendar-section h2 {
+  color: #FBC926 ;
+}
