@@ -28,7 +28,7 @@ class App extends Component {
   
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div><img src={logo} alt="Logo" /></div>
         <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
         <Events fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} toDate={moment(this.state.startDate).add(7, 'days').format('YYYY-MM-DD')}/>
