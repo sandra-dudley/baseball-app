@@ -1,7 +1,15 @@
+:global(:root) {
+  --primary-color: #375D4C;
+  --secondary-color: #FBC926;
+  --heading-font: 'Teko', sans-serif;
+  --body-font:'Montserrat', sans-serif;
+  --icon-font: 'FontAwesome';
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--body-font);
   color: #000;
   text-align: center;
 }
@@ -9,14 +17,14 @@ h1{
   margin-top:2em;
 }
 h1,h2,h3 {
-  font-family: 'Teko', sans-serif;
+  font-family: var(--heading-font);
   text-transform: uppercase;
-  color: #375D4C;
+  color: var(--primary-color);
   
 }
 
 .calendar-section {
-  background: #375D4C;
+  background: var(--primary-color);
   padding: 2em;
   margin-top: 1em;
 }
@@ -26,7 +34,7 @@ h1,h2,h3 {
 .event-card {
   display: inline-block;
   width: 30%;
-  border: solid 3px #FBC926;
+  border: solid 3px var(--secondary-color);
   background: #fff;
   border-radius: 10px;
   padding: 1em;
@@ -38,18 +46,18 @@ h1,h2,h3 {
 }
 .event-time:before {
   content: '\f017';
-  font-family: 'FontAwesome';
-  color: #FBC926;
+  font-family: var(--icon-font);
+  color: var(--secondary-color);
   margin-right:0.5em;
   transition: color 0.5s ease-in-out;
 }
 .event-venue-name:before {
   content: '\f041';
-  font-family: 'FontAwesome';
-  color: #FBC926;
+  font-family: var(--icon-font);
+  color:  var(--secondary-color);
   margin-right:0.5em;
   transition: color 0.5s ease-in-out;
 }
 .event-card:hover .event-time:before, .event-card:hover .event-venue-name:before {
-  color: #375D4C;
+  color: var(--primary-color);
 }
