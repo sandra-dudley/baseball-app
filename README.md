@@ -33,3 +33,12 @@ App (contains the main state variables)
 - Enter details from seatgeek
 - Type `npm install`
 - start the server with `npm start`
+
+
+## Added Features
+
+**23June2017 - Sandra**
+- Created some kind of branding with logo, font and colours
+- (Bootstrap 4)[https://v4-alpha.getbootstrap.com/] (replacing Bootstrap 3). Added both css and js.
+- (FontAwesome)[http://fontawesome.io/]
+- Separated styles so each component is independant. However, I created some global variables in index.css (font and colours) so that they can be used consistently throughout the application. (More info here)[https://medium.com/@pioul/modular-css-with-react-61638ae9ea3e#cc90]
