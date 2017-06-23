@@ -10,9 +10,10 @@ class Event extends Component {
     return(
       <li className="event-card">
         <h3>{this.props.event.short_title}</h3>
-        <p className="text-muted">
-          {time}<br/>
-          @{venue.name}
+        <p className="text-muted event-time">
+          {time}</p>
+        <p className="text-muted event-venue-name">
+          {venue.name}
         </p>
       </li>
       )
