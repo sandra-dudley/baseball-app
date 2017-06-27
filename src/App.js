@@ -3,7 +3,8 @@ import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
 import moment from 'moment';
 
-import logo from './assets/baseball-calendar.jpg';
+import logo from './assets/baseball-calendar.png';
+import stadium from './assets/stadium.jpg';
 
 
 class App extends Component {
@@ -27,9 +28,17 @@ class App extends Component {
   }
   
   render() {
+    const divStyle = {
+      backgroundImage: 'url('+stadium+')',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% auto',
+      backgroundColor: '#09140c',
+      backgroundAttachment: 'fixed',
+      padding: 0
+    };
     return (
-      <div className="container-fluid">
-        <div><img src={logo} alt="Logo" /></div>
+      <div className="container-fluid" style={divStyle}>
+        <div><img src={logo} alt="Logo" width="300" height="300"/></div>
         <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
         <Events fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} toDate={moment(this.state.startDate).add(7, 'days').format('YYYY-MM-DD')}/>
       </div>
