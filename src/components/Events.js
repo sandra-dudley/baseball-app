@@ -65,7 +65,7 @@ class Events extends Component {
     return(
       <div>
         <h1>Events </h1>
-        <ul>
+        <ul style={{marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
