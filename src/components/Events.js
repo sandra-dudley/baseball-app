@@ -9,7 +9,7 @@ class Events extends Component {
   constructor(props) {
       super(props);
 
-      const seatgeek = 'https://api.seatgeek.com/2/events?taxonomies.name=baseball&client_id='+process.env.REACT_APP_SEATGEEK_CLIENT_ID+'&client_secret='+process.env.REACT_APP_SEATGEEK_CLIENT_SECRET
+      const seatgeek = 'https://api.seatgeek.com/2/events?per_page=24&taxonomies.name=baseball&client_id='+process.env.REACT_APP_SEATGEEK_CLIENT_ID+'&client_secret='+process.env.REACT_APP_SEATGEEK_CLIENT_SECRET
       
       this.state = {
         allEvents:'Loading...',

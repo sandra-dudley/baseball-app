@@ -1,7 +1,7 @@
 
 .event-card {
   display: inline-block;
-  width: 30%;
+  width: 25%;
   border: solid 3px var(--secondary-color);
   background: #fff;
   border-radius: 10px;
