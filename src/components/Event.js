@@ -23,6 +23,7 @@ class Event extends Component {
         <p className="text-muted event-venue-name">
           {venue.name}
         </p>
+        <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a></p>
       </li>
       )
   }
