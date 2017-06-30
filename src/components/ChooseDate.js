@@ -19,7 +19,7 @@ class ChooseDate extends Component {
   render() {
     return (
       <div className="calendar-section">
-    <h2>Choose a date </h2>
+    <h2>Find a baseball match</h2>
     Start date:
     <DatePicker
         todayButton={"Today"}
