@@ -34,10 +34,16 @@ class Events extends Component {
     if (nextProps.fromDate !== this.state.fromDate) {
       this.setState({ fromDate: nextProps.fromDate });
       console.log(nextProps.fromDate );
-      this.initialise();
-      
+      //this.initialise();   
     }
   }
+
+  //API call when component will update
+  componentWillUpdate(nextProps) {
+    //make sure it is only calling when props are updated
+    if (nextProps.fromDate !== this.props.fromDate)
+      this.initialise();
+    }
   initialise () {
     /*
     * Connects to api
@@ -52,6 +58,7 @@ class Events extends Component {
       }
     })
     .then(function (response) {
+      console.log(response);
       this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
     }.bind(this))
     .catch(function (error) {
