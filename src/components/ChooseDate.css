@@ -7,3 +7,9 @@
 .calendar-section h2 {
   color: #FBC926 ;
 }
+input {
+  max-width: 110px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+}

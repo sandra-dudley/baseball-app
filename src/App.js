@@ -11,9 +11,11 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      startDate: moment()
+      startDate: moment(),
+      endDate: moment()
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
  
   handleChange(date) {
@@ -22,7 +24,19 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      startDate: date
+      startDate: date,
+      endDate: date
+    });
+    console.log('changed date from App');
+  }
+
+  handleChangeEnd(date) {
+    /*
+    ** endDate: when the user wants to search baseball events to
+    ** This function is called from child component ChooseDate
+    */
+    this.setState({
+      endDate: date
     });
     console.log('changed date from App');
   }
@@ -39,8 +53,16 @@ class App extends Component {
     return (
       <div className="container-fluid" style={divStyle}>
         <div><img src={logo} alt="Logo" width="300" height="300"/></div>
-        <ChooseDate startDate = {this.state.startDate} handleChange={this.handleChange}/>
-        <Events fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} toDate={moment(this.state.startDate).add(7, 'days').format('YYYY-MM-DD')}/>
+        <ChooseDate 
+          startDate = {this.state.startDate} 
+          handleChange = {this.handleChange}
+          endDate = {this.state.endDate} 
+          handleChangeEnd = {this.handleChangeEnd}
+        />
+        <Events 
+          fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
+          toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
+        />
       </div>
     );
   }
