@@ -3,6 +3,7 @@
   background: var(--primary-color);
   padding: 2em;
   margin-top: 1em;
+  color: #fff;
 }
 .calendar-section h2 {
   color: #FBC926 ;
@@ -12,4 +13,7 @@ input {
   margin: 10px;
   text-align: center;
   border-radius: 10px;
+}
+.from {
+  margin-right: 2em;
 }

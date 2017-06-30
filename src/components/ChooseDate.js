@@ -20,6 +20,7 @@ class ChooseDate extends Component {
     return (
       <div className="calendar-section">
     <h2>Choose a date </h2>
+    Start date:
     <DatePicker
         todayButton={"Today"}
         selected={this.props.startDate}
@@ -28,7 +29,9 @@ class ChooseDate extends Component {
         endDate={this.props.endDate}
         onChange={this.props.handleChange}
         minDate={moment()}
+        className="from"
     />
+    End date:
     <DatePicker
         selected={this.props.endDate}
         selectsEnd
