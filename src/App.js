@@ -12,7 +12,7 @@ class App extends Component {
     super(props)
     this.state = {
       startDate: moment(),
-      endDate: moment()
+      endDate: moment().add(3,"days")
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -24,8 +24,7 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      startDate: date,
-      endDate: date
+      startDate: date
     });
     console.log('changed date from App');
   }

@@ -69,6 +69,7 @@ class Events extends Component {
 
       <div>
         <h1 className="event-header">Found {this.state.totalEvents} events </h1>
+        <div style={{color: '#fff'}}>Between {moment(this.props.fromDate).format('llll')} and {moment(this.props.toDate).format('llll')}</div>
 
         <ul className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
           {
