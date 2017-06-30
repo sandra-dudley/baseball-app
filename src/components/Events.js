@@ -12,9 +12,7 @@ class Events extends Component {
       
       this.state = {
         allEvents:'Loading...',
-        allEventsObject: {},
         seatgeek: seatgeek,
-        fromDate:''
       }      
       this.initialise = this.initialise.bind(this);
     
@@ -24,27 +22,19 @@ class Events extends Component {
     * Gets fromDate from parent component
     * and saves it as its own state variable
     */
-    this.setState({fromDate: this.props.fromDate})
-    this.initialise();
+    this.initialise(this.props.fromDate);
   }
   componentWillReceiveProps(nextProps) {
     /*
     * Runs anytime the props change data
     */
-    if (nextProps.fromDate !== this.state.fromDate) {
-      this.setState({ fromDate: nextProps.fromDate });
-      console.log(nextProps.fromDate );
-      //this.initialise();   
+    if (nextProps.fromDate !== this.props.fromDate 
+        || nextProps.toDate !== this.props.fromDate) {
+      this.initialise(nextProps.fromDate, nextProps.toDate);   
     }
   }
 
-  //API call when component will update
-  componentWillUpdate(nextProps) {
-    //make sure it is only calling when props are updated
-    if (nextProps.fromDate !== this.props.fromDate)
-      this.initialise();
-    }
-  initialise () {
+  initialise (fDate, tDate) {
     /*
     * Connects to api
     */
@@ -53,13 +43,13 @@ class Events extends Component {
     });
     instance.get('',{
       params: {
-        'datetime_utc.gte': this.state.fromDate,
-        'datetime_utc.lte': this.props.toDate
+        'datetime_utc.gte': fDate,
+        'datetime_utc.lte': tDate
       }
     })
     .then(function (response) {
       console.log(response);
-      this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
+      this.setState({allEvents:response.data.events});
     }.bind(this))
     .catch(function (error) {
       console.log(error);
@@ -68,15 +58,17 @@ class Events extends Component {
   
 
   render () {
-    
-    return(
+    if(!this.state.allEvents[0]) {
+      return <div>Loading...</div>;
+    }
+    return (
       <div>
         <h1>Events </h1>
         <ul style={{marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
-                <Event event={event} date={moment(event.datetime_utc).format('DD MMMM YYYY')} key={index} />
+                <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
                 )
 
             })
@@ -85,7 +77,7 @@ class Events extends Component {
         }
         </ul>
       </div>
-      )
+    )
   }
 }
 
