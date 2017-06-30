@@ -53,7 +53,6 @@ class Events extends Component {
 
       console.log(response);
       this.setState({allEvents:response.data.events});
-
     }.bind(this))
     .catch(function (error) {
       console.log(error);
