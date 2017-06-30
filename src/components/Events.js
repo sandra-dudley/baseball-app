@@ -60,6 +60,7 @@ class Events extends Component {
     .then(function (response) {
       console.log(response);
       this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
+      this.initialise();
     }.bind(this))
     .catch(function (error) {
       console.log(error);
