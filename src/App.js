@@ -48,7 +48,8 @@ class App extends Component {
       backgroundSize: '100% auto',
       backgroundColor: '#09140c',
       backgroundAttachment: 'fixed',
-      padding: 0
+      padding: 0,
+      minHeight: '100vh'
     };
     return (
       <div className="container-fluid" style={divStyle}>

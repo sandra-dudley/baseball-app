@@ -70,7 +70,7 @@ class Events extends Component {
       <div>
         <h1 className="event-header">Events </h1>
 
-        <ul className="d-flex flex-wrap justify-content-center" style={{marginBottom:0}}>
+        <ul className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
