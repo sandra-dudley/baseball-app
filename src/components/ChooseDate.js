@@ -19,8 +19,8 @@ class ChooseDate extends Component {
   render() {
     return (
       <div className="calendar-section">
-    <h2>Find a baseball match</h2>
-    Start date:
+    <h2>Find a baseball game</h2>
+    Between
     <DatePicker
         todayButton={"Today"}
         selected={this.props.startDate}
@@ -32,7 +32,7 @@ class ChooseDate extends Component {
         className="from dateField"
         dateFormat="ddd, MMM D, YYYY"
     />
-    End date:
+    and
     <DatePicker
         selected={this.props.endDate}
         selectsEnd
