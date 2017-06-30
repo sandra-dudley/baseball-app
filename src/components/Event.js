@@ -16,7 +16,7 @@ class Event extends Component {
     const time = moment(event.datetime_local).format('llll');
 
     return(
-      <li className="event-card">
+      <li className="event-card align-self-stretch">
         <h3>{this.props.event.short_title}</h3>
         <p className="text-muted event-time">
           {time}</p>

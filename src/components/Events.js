@@ -69,7 +69,8 @@ class Events extends Component {
 
       <div>
         <h1 className="event-header">Events </h1>
-        <ul style={{marginBottom:0}}>
+
+        <ul className="d-flex flex-wrap" style={{marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
