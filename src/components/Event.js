@@ -6,7 +6,7 @@ class Event extends Component {
   render () {
     const event = this.props.event;    
     const venue = this.props.event.venue ? this.props.event.venue : 'loading...';
-    const time = moment(event.datetime_local).calendar();
+    const time = moment(event.datetime_local).format('llll');
 
     return(
       <li className="event-card">
