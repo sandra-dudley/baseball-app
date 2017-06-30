@@ -37,6 +37,10 @@ App (contains the main state variables)
 
 ## Added Features
 
+**30June2017 - Matt**
+- Added a second date picker so that the user can pick a from date and a to date.
+- Some bug fixes and minor formatting changes
+
 **23June2017 - Sandra**
 - Created some kind of branding with logo, font and colours
 - [Bootstrap 4](https://v4-alpha.getbootstrap.com/) (replacing Bootstrap 3). Added both css and js.
