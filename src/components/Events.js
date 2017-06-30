@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Event';
 import moment from 'moment';
+import styles from './Events.css';
 var axios = require('axios');
 
 
@@ -28,6 +29,7 @@ class Events extends Component {
     /*
     * Runs anytime the props change data
     */
+
     if (nextProps.fromDate !== this.props.fromDate 
         || nextProps.toDate !== this.props.fromDate) {
       this.initialise(nextProps.fromDate, nextProps.toDate);   
@@ -48,8 +50,10 @@ class Events extends Component {
       }
     })
     .then(function (response) {
+
       console.log(response);
       this.setState({allEvents:response.data.events});
+
     }.bind(this))
     .catch(function (error) {
       console.log(error);
@@ -58,12 +62,14 @@ class Events extends Component {
   
 
   render () {
+
     if(!this.state.allEvents[0]) {
       return <div>Loading...</div>;
     }
     return (
+
       <div>
-        <h1>Events </h1>
+        <h1 className="event-header">Events </h1>
         <ul style={{marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {

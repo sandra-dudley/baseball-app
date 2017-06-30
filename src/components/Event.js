@@ -3,6 +3,13 @@ import moment from 'moment';
 import styles from './Events.css';
 
 class Event extends Component {
+  constructor(props) {
+      super(props);
+      this.init = this.init.bind(this)
+  }
+  init() {
+    console.log(this.props.date)
+  }
   render () {
     const event = this.props.event;    
     const venue = this.props.event.venue ? this.props.event.venue : 'loading...';

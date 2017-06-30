@@ -1,6 +1,7 @@
 :global(:root) {
   --primary-color: #375D4C;
   --secondary-color: #FBC926;
+  --test: #000;
   --heading-font: 'Teko', sans-serif;
   --body-font:'Montserrat', sans-serif;
   --icon-font: 'FontAwesome';

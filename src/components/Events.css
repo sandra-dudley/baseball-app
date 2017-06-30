@@ -29,3 +29,6 @@
 .event-card:hover .event-time:before, .event-card:hover .event-venue-name:before {
   color: var(--primary-color);
 }
+.event-header {
+  color:var(--secondary-color);
+}
