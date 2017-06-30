@@ -29,7 +29,8 @@ class ChooseDate extends Component {
         endDate={this.props.endDate}
         onChange={this.props.handleChange}
         minDate={moment()}
-        className="from"
+        className="from dateField"
+        dateFormat="ddd, MMM D, YYYY"
     />
     End date:
     <DatePicker
@@ -39,6 +40,8 @@ class ChooseDate extends Component {
         endDate={this.props.endDate}
         onChange={this.props.handleChangeEnd}
         minDate={this.props.startDate}
+        className="dateField"
+        dateFormat="ddd, MMM D, YYYY"
     />
     </div>
     );
