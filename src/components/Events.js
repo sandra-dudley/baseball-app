@@ -49,12 +49,7 @@ class Events extends Component {
     })
     .then(function (response) {
       console.log(response);
-<<<<<<< HEAD
-      this.setState({allEvents:Array.from(response.data.events), allEventsObject: response.data.events});
-      this.initialise();
-=======
       this.setState({allEvents:response.data.events});
->>>>>>> d106f4d45d35c10d5728e092c6ec80a3413a4bfd
     }.bind(this))
     .catch(function (error) {
       console.log(error);
