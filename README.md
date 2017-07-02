@@ -1,3 +1,7 @@
+## First deploy 02/07/2017
+Lots of work still need to be done but view current progress at https://sandra-dudley.github.io/baseball-app/
+
+
 ## Info
 
 - API from seatgeek.com
