@@ -12,7 +12,7 @@ input {
   max-width: 300px;
   margin: 10px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .from {
   margin-right: 0.7em;
