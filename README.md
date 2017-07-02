@@ -37,6 +37,9 @@ App (contains the main state variables)
 
 ## Added Features
 
+**30 June 2017 - Sandra**
+- Layout and UX improvement
+
 **30June2017 - Matt**
 - Added a second date picker so that the user can pick a from date and a to date.
 - Some bug fixes and minor formatting changes
