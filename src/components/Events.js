@@ -14,8 +14,11 @@ class Events extends Component {
         allEvents:'Loading...',
         seatgeek: seatgeek,
         totalEvents:0,
+        page: 1,
       }      
       this.initialise = this.initialise.bind(this);
+      this.pageNumber = this.pageNumber.bind(this);
+      this.changePage = this.changePage.bind(this);
     
   }
   componentDidMount() {
@@ -32,7 +35,13 @@ class Events extends Component {
 
     if (nextProps.fromDate !== this.props.fromDate 
         || nextProps.toDate !== this.props.toDate) {
+          this.setState({page: 1});
       this.initialise(nextProps.fromDate, nextProps.toDate);   
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.initialise(this.props.fromDate, this.props.toDate); 
     }
   }
 
@@ -46,19 +55,41 @@ class Events extends Component {
     instance.get('',{
       params: {
         'datetime_utc.gte': fDate,
-        'datetime_utc.lte': tDate
+        'datetime_utc.lte': tDate,
+        'page': this.state.page
       }
     })
     .then(function (response) {
 
       console.log(response);
       this.setState({allEvents:response.data.events, totalEvents: response.data.meta.total});
+      this.pageNumber();
     }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
   }
   
+  pageNumber () {
+    console.log("in page number");
+    var totalPages;
+    if (this.state.totalEvents > 24) {
+      totalPages = Math.round(this.state.totalEvents/24);
+      console.log(totalPages);
+    }
+    var pagination = [];
+    for (var i = 0; i < totalPages; i ++) {
+      pagination.push(<a href='#' onClick={this.changePage} data-pageNum = {i+1} style={{padding:0.2+'em', background: '#fff', borderRadius: 3+"px", marginRight: 0.5+'em'}}>{i+1}</a>);
+    }
+    
+    return pagination;
+  }
+
+  changePage(event) {
+    event.preventDefault();
+    console.log("I want another page ", event.target.dataset.pagenum);
+    this.setState({page: event.target.dataset.pagenum});
+  }
 
   render () {
 
@@ -83,6 +114,7 @@ class Events extends Component {
 
         }
         </ul>
+        {this.pageNumber()}
       </div>
     )
   }
