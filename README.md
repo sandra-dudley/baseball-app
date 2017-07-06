@@ -37,6 +37,9 @@ App (contains the main state variables)
 
 ## Added Features
 
+**06 July 2017 - Sandra **
+- Added pagination for event listing
+
 **30 June 2017 - Sandra**
 - Layout and UX improvement
 
