@@ -4,7 +4,6 @@ import moment from 'moment';
 import styles from './Events.css';
 var axios = require('axios');
 
-
 class Events extends Component {
   constructor(props) {
       super(props);
