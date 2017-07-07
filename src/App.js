@@ -50,6 +50,10 @@ class App extends Component {
       padding: 0,
       minHeight: '100vh'
     };
+    const style = {
+      width: '800px',
+      height: '400px'
+    };
     return (
       <div className="container-fluid" style={divStyle}>
         <div><img src={logo} alt="Logo" width="300" height="300"/></div>

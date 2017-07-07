@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import styles from './Events.css';
+import './Events.css';
 
 class Event extends Component {
   constructor(props) {

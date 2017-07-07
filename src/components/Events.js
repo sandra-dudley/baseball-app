@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Event from './Event';
 import moment from 'moment';
-import styles from './Events.css';
+import SimpleMap from './SimpleMap';
+
+
 var axios = require('axios');
 
 class Events extends Component {
@@ -18,7 +20,7 @@ class Events extends Component {
       this.initialise = this.initialise.bind(this);
       this.pageNumber = this.pageNumber.bind(this);
       this.changePage = this.changePage.bind(this);
-    
+
   }
   componentDidMount() {
     /*
@@ -78,7 +80,7 @@ class Events extends Component {
     }
     var pagination = [];
     for (var i = 0; i < totalPages; i ++) {
-      pagination.push(<a href='#' onClick={this.changePage} data-pageNum = {i+1} style={{padding:0.2+'em', background: '#fff', borderRadius: 3+"px", marginRight: 0.5+'em'}}>{i+1}</a>);
+      pagination.push(<a href='#' onClick={this.changePage} key = {i+11} data-pageNum = {i+1} style={{padding:0.2+'em', background: '#fff', borderRadius: 3+"px", marginRight: 0.5+'em'}}>{i+1}</a>);
     }
     
     return pagination;
@@ -89,15 +91,23 @@ class Events extends Component {
     console.log("I want another page ", event.target.dataset.pagenum);
     this.setState({page: event.target.dataset.pagenum});
   }
+  
 
   render () {
-
+    const style = {
+      width: '100%',
+      height: '400px',
+    }
     if(!this.state.allEvents[0]) {
       return <h1  className="event-header">Sorry no result...</h1>;
     }
     return (
 
       <div>
+      <div style={style}>
+      <SimpleMap/>
+      </div>
+
         <h1 className="event-header">Found {this.state.totalEvents} events </h1>
         <div style={{color: '#fff'}}>Between {moment(this.props.fromDate).format('ddd, MMM D, YYYY')} and {moment(this.props.toDate).format('ddd, MMM D, YYYY') }</div>
 
@@ -119,4 +129,4 @@ class Events extends Component {
   }
 }
 
-export default Events;
+export default Events
