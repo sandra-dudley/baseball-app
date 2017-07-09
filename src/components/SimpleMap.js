@@ -10,33 +10,89 @@ import Marker from './Marker';
 class SimpleMap extends Component {
   constructor(props) {
     super(props);
-  this.fetchPlaces = this.fetchPlaces.bind(this)
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+    };
+  this.fetchPlaces = this.fetchPlaces.bind(this);
+  this.onMarkerClick = this.onMarkerClick.bind(this);
+  this.onMapClicked = this.onMapClicked.bind(this);
+  this.renderMarker = this.renderMarker.bind(this);
     }
     
   fetchPlaces(mapProps, map) {
     const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
   }
+  onMarkerClick(props, marker, e) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+    console.log("click")
+  }
   
+  onMapClicked(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  }
   
-  render() {
-
-    return ( 
-      <Map google={this.props.google} onReady={this.fetchPlaces} containerStyle={{height: '400px'}}>
-        <Marker
-          title={'The marker`s title will appear as a tooltip.'}
-          name={'SOMA'}
-          position={{lat: 37.778519, lng: -122.405640}} />
-        <Marker
-          name={'Dolores park'}
-          position={{lat: 37.759703, lng: -122.428093}} />
-      
-        <InfoWindow onClose={this.onInfoWindowClose} visible={true}>
+  renderMarker() {
+    var listing = [];
+    console.log("center", this.props.mapCenter)
+    if (this.props.google && this.props.allEvents && typeof this.props.allEvents === "object") {
+    Array.from(this.props.allEvents).map((event,index) => {
+      console.log(event, event.title, event.venue.location.lon, event.venue.location.lat);
+      listing.push(
+        <Marker 
+          name={event.title}
+          position={{lat: event.venue.location.lat, lng: event.venue.location.lon}} 
+          onClick={this.onMarkerClick}
+          key = {index}
+        />
+        )
+    })
+    listing.push(<InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          key={this.props.allEvents.length}>
             <div>
-              <h1>Current location</h1>
+              <h1>{this.state.selectedPlace.name}</h1>
             </div>
-        </InfoWindow>
+        </InfoWindow>)
+    return listing;
+    }
+  }
+  
+
+  
+
+    
+  render() {
+    
+    return ( 
+      <div>
+      
+      <Map 
+        google={this.props.google} 
+        onReady={this.fetchPlaces} 
+        zoom={4}
+        initialCenter = {{lat:37.0902,lng:-95.7129}}
+        containerStyle={{height: '400px'}} 
+        onClick={this.onMapClicked}>
+        {
+          this.renderMarker()
+      }
+        
+        
         </Map>
+        </div>
     );
   }
 }
