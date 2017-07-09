@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       startDate: moment(),
       endDate: moment().add(3,"days"),
-      totalEvents: 0
+      totalEvents: 0,
+      mapView: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -86,6 +87,7 @@ class App extends Component {
           fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
           toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
           handleTotalEvents = {this.handleTotalEvents}
+          mapView = {this.state.mapView}
         />
       </div>
       </div>

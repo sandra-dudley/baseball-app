@@ -20,6 +20,7 @@ class Events extends Component {
       this.initialise = this.initialise.bind(this);
       this.pageNumber = this.pageNumber.bind(this);
       this.changePage = this.changePage.bind(this);
+      this.renderMap = this.renderMap.bind(this);
 
   }
   componentDidMount() {
@@ -88,34 +89,42 @@ class Events extends Component {
     this.setState({page: event.target.dataset.pagenum});
   }
   
-
-  render () {
+  renderMap () {
     const style = {
       width: '100%',
       height: '400px',
     }
+    return(
+      <div style={style} >
+          <SimpleMap allEvents={this.state.allEvents} visible="false"/>
+        </div>
+      )
+  }
+  
+  renderListing() {
+    return(
+      <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
+        {
+      Array.from(this.state.allEvents).map((event, index) => {
+             return (
+              <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
+              )
+          })
+        }
+      </div>
+        )
+  }
+  render () {
+    
     if(!this.state.allEvents[0]) {
       return <h1  className="event-header">Sorry no result...</h1>;
     }
     return (
 
       <div>
-      {this.pageNumber()}
-      <div style={style}>
-      <SimpleMap allEvents={this.state.allEvents}/>
-      </div>
-        <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
-          {
-        Array.from(this.state.allEvents).map((event, index) => {
-               return (
-                <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
-                )
-
-            })
-
-
-        }
-        </div>
+        { this.pageNumber()}
+        { this.renderMap() }
+        { this.renderListing() }
         
       </div>
     )
