@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
+import ToggleViewButton from './components/ToggleViewButton';
 import moment from 'moment';
 import './App.css'
 import stadium from './assets/stadium.jpg';
@@ -88,20 +89,7 @@ class App extends Component {
         />
         </nav>
         
-        <div>
-          <div className="btn-group toggleView">
-            <label className={
-              (this.state.mapView) ? "btn btn-primary" : "btn btn-primary active"
-            }>
-              <input type="radio"value="false" onChange={this.mapVisibility} checked={this.state.mapView === false} /> View list
-            </label>
-            <label className={
-              (this.state.mapView) ? "btn btn-primary active" : "btn btn-primary"
-            }>
-              <input type="radio" value="true" onChange={this.mapVisibility} checked={this.state.mapView === true}/> View map
-            </label>
-          </div>
-        </div>
+        <ToggleViewButton mapView={this.state.mapView} mapVisibility={this.mapVisibility}/>
         
         <Events 
           fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
