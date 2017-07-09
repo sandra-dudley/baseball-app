@@ -61,9 +61,8 @@ class Events extends Component {
       }
     })
     .then(function (response) {
-
-      console.log(response);
       this.setState({allEvents:response.data.events, totalEvents: response.data.meta.total});
+      this.props.handleTotalEvents(response.data.meta.total);
       this.pageNumber();
     }.bind(this))
     .catch(function (error) {
@@ -72,11 +71,9 @@ class Events extends Component {
   }
   
   pageNumber () {
-    console.log("in page number");
     var totalPages;
     if (this.state.totalEvents > 24) {
       totalPages = Math.round(this.state.totalEvents/24);
-      console.log(totalPages);
     }
     var pagination = [];
     for (var i = 0; i < totalPages; i ++) {
@@ -88,7 +85,6 @@ class Events extends Component {
 
   changePage(event) {
     event.preventDefault();
-    console.log("I want another page ", event.target.dataset.pagenum);
     this.setState({page: event.target.dataset.pagenum});
   }
   
@@ -108,10 +104,6 @@ class Events extends Component {
       <div style={style}>
       <SimpleMap allEvents={this.state.allEvents}/>
       </div>
-
-        <h1 className="event-header">Found {this.state.totalEvents} events </h1>
-        <div style={{color: '#fff'}}>Between {moment(this.props.fromDate).format('ddd, MMM D, YYYY')} and {moment(this.props.toDate).format('ddd, MMM D, YYYY') }</div>
-
         <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {

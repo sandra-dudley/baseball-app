@@ -48,10 +48,8 @@ class SimpleMap extends Component {
   
   renderMarkers() {
     var listing = [];
-    console.log("center", this.props.mapCenter)
     if (this.props.allEvents && typeof this.props.allEvents === "object") {
     Array.from(this.props.allEvents).map((event,index) => {
-      console.log(event, event.title, event.venue.location.lon, event.venue.location.lat);
       listing.push(
         <Marker 
           name={event.title}
@@ -75,8 +73,7 @@ class SimpleMap extends Component {
   }
   renderInfoWindow() {
     if (this.state.selectedPlace.event) {
-      console.log("sel place", this.state.selectedPlace.event.datetime_local)
-      var markerEvent = <EventContent event={this.state.selectedPlace.event} />
+      let markerEvent = <EventContent event={this.state.selectedPlace.event} />
         return markerEvent;
     }
   }

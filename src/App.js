@@ -3,7 +3,6 @@ import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
 import moment from 'moment';
 
-import logo from './assets/baseball-calendar.png';
 import stadium from './assets/stadium.jpg';
 
 
@@ -12,10 +11,12 @@ class App extends Component {
     super(props)
     this.state = {
       startDate: moment(),
-      endDate: moment().add(3,"days")
+      endDate: moment().add(3,"days"),
+      totalEvents: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
+    this.handleTotalEvents = this.handleTotalEvents.bind(this);
   }
  
   handleChange(date) {
@@ -28,7 +29,7 @@ class App extends Component {
     });
     console.log('changed date from App');
   }
-
+  
   handleChangeEnd(date) {
     /*
     ** endDate: when the user wants to search baseball events to
@@ -39,6 +40,13 @@ class App extends Component {
       page: 1
     });
     console.log('changed date from App');
+  }
+  
+  handleTotalEvents (total) {
+    this.setState({
+      totalEvents: total
+    });
+    console.log("total events", total);
   }
   
   render() {
@@ -56,18 +64,26 @@ class App extends Component {
       height: '400px'
     };
     return (
+      <div>
       <div className="container-fluid" style={divStyle}>
-        <div><img src={logo} alt="Logo" width="300" height="300"/></div>
+      <nav className="navbar">
+      <div></div>
         <ChooseDate 
           startDate = {this.state.startDate} 
           handleChange = {this.handleChange}
           endDate = {this.state.endDate} 
           handleChangeEnd = {this.handleChangeEnd}
+          totalEvents = {this.state.totalEvents}
         />
+        </nav>
+        
+        
         <Events 
           fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
           toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
+          handleTotalEvents = {this.handleTotalEvents}
         />
+      </div>
       </div>
     );
   }
