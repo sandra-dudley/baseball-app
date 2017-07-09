@@ -111,7 +111,7 @@ class Events extends Component {
         <h1 className="event-header">Found {this.state.totalEvents} events </h1>
         <div style={{color: '#fff'}}>Between {moment(this.props.fromDate).format('ddd, MMM D, YYYY')} and {moment(this.props.toDate).format('ddd, MMM D, YYYY') }</div>
 
-        <ul className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
+        <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
           {
         Array.from(this.state.allEvents).map((event, index) => {
                return (
@@ -122,7 +122,7 @@ class Events extends Component {
 
 
         }
-        </ul>
+        </div>
         {this.pageNumber()}
       </div>
     )

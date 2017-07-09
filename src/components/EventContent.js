@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import EventContent from './EventContent';
 import './Events.css';
 
-class Event extends Component {
+class EventContent extends Component {
   constructor(props) {
       super(props);
       this.init = this.init.bind(this)
@@ -17,11 +16,17 @@ class Event extends Component {
     const time = moment(event.datetime_local).format('llll');
 
     return(
-      <div className = "col-md-3 event-card">
-          <EventContent event={this.props.event} />
-      </div>
+        <div>
+        <h3>{this.props.event.short_title}</h3>
+        <p className="text-muted event-time">
+          {time}</p>
+        <p className="text-muted event-venue-name">
+          {venue.name}
+        </p>
+        <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a></p>
+        </div>
       )
   }
 }
 
-export default Event;
+export default EventContent;

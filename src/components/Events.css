@@ -1,12 +1,11 @@
 
 .event-card {
   display: inline-block;
-  width: 25%;
   border: solid 3px var(--secondary-color);
   background: #fff;
-  border-radius: 10px;
+  border-radius: 3px;
   padding: 1em;
-  margin: 1em 2em;
+  margin: 0.5em 1em;
   transition: background 0.5s ease-in-out;
 }
 .event-card:hover {

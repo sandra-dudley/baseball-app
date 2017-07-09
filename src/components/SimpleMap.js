@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import Marker from './Marker';
+import Event from './Event';
+import EventContent from './EventContent';
+import moment from 'moment';
 
 
 class SimpleMap extends Component {
@@ -18,7 +21,7 @@ class SimpleMap extends Component {
   this.fetchPlaces = this.fetchPlaces.bind(this);
   this.onMarkerClick = this.onMarkerClick.bind(this);
   this.onMapClicked = this.onMapClicked.bind(this);
-  this.renderMarker = this.renderMarker.bind(this);
+  this.renderMarkers = this.renderMarkers.bind(this);
     }
     
   fetchPlaces(mapProps, map) {
@@ -29,9 +32,9 @@ class SimpleMap extends Component {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
     });
-    console.log("click")
+    
   }
   
   onMapClicked(props) {
@@ -43,10 +46,10 @@ class SimpleMap extends Component {
     }
   }
   
-  renderMarker() {
+  renderMarkers() {
     var listing = [];
     console.log("center", this.props.mapCenter)
-    if (this.props.google && this.props.allEvents && typeof this.props.allEvents === "object") {
+    if (this.props.allEvents && typeof this.props.allEvents === "object") {
     Array.from(this.props.allEvents).map((event,index) => {
       console.log(event, event.title, event.venue.location.lon, event.venue.location.lat);
       listing.push(
@@ -54,6 +57,7 @@ class SimpleMap extends Component {
           name={event.title}
           position={{lat: event.venue.location.lat, lng: event.venue.location.lon}} 
           onClick={this.onMarkerClick}
+          event = {event}
           key = {index}
         />
         )
@@ -63,13 +67,19 @@ class SimpleMap extends Component {
           visible={this.state.showingInfoWindow}
           key={this.props.allEvents.length}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              {this.renderInfoWindow()}
             </div>
         </InfoWindow>)
     return listing;
     }
   }
-  
+  renderInfoWindow() {
+    if (this.state.selectedPlace.event) {
+      console.log("sel place", this.state.selectedPlace.event.datetime_local)
+      var markerEvent = <EventContent event={this.state.selectedPlace.event} />
+        return markerEvent;
+    }
+  }
 
   
 
@@ -87,10 +97,8 @@ class SimpleMap extends Component {
         containerStyle={{height: '400px'}} 
         onClick={this.onMapClicked}>
         {
-          this.renderMarker()
-      }
-        
-        
+          this.renderMarkers()
+        }
         </Map>
         </div>
     );
