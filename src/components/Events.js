@@ -105,7 +105,7 @@ class Events extends Component {
 
       <div>
       <div style={style}>
-      <SimpleMap/>
+      <SimpleMap allEvents={this.state.allEvents}/>
       </div>
 
         <h1 className="event-header">Found {this.state.totalEvents} events </h1>
