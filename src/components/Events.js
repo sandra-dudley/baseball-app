@@ -90,18 +90,20 @@ class Events extends Component {
   }
   
   renderMap () {
+    console.log("rendering map")
     const style = {
       width: '100%',
       height: '400px',
     }
     return(
       <div style={style} >
-          <SimpleMap allEvents={this.state.allEvents} visible="false"/>
+          <SimpleMap allEvents={this.state.allEvents}/>
         </div>
       )
   }
   
   renderListing() {
+    console.log("rendering listing")
     return(
       <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
         {
@@ -123,8 +125,7 @@ class Events extends Component {
 
       <div>
         { this.pageNumber()}
-        { this.renderMap() }
-        { this.renderListing() }
+        { (this.props.mapView) ? this.renderMap() : this.renderListing() }
         
       </div>
     )
