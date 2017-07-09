@@ -25,9 +25,14 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      startDate: date
+      startDate: date,
+      page: 1
     });
-    console.log('changed date from App');
+    if (date>this.state.endDate) {
+      
+      this.setState({endDate: moment(date).add(3,"days")});
+      this.handleChangeEnd(moment(date).add(3,"days"))
+    }
   }
   
   handleChangeEnd(date) {
@@ -39,7 +44,6 @@ class App extends Component {
       endDate: date,
       page: 1
     });
-    console.log('changed date from App');
   }
   
   handleTotalEvents (total) {
