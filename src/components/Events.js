@@ -104,6 +104,7 @@ class Events extends Component {
     return (
 
       <div>
+      {this.pageNumber()}
       <div style={style}>
       <SimpleMap allEvents={this.state.allEvents}/>
       </div>
@@ -123,7 +124,7 @@ class Events extends Component {
 
         }
         </div>
-        {this.pageNumber()}
+        
       </div>
     )
   }

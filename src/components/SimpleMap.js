@@ -23,7 +23,7 @@ class SimpleMap extends Component {
   this.onMapClicked = this.onMapClicked.bind(this);
   this.renderMarkers = this.renderMarkers.bind(this);
     }
-    
+
   fetchPlaces(mapProps, map) {
     const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);

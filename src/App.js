@@ -35,7 +35,8 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      endDate: date
+      endDate: date,
+      page: 1
     });
     console.log('changed date from App');
   }
