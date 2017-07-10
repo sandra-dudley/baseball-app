@@ -4,9 +4,15 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "google-map-react": "^0.24.0",
+    "google-maps-react": "^1.0.19",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-datepicker": "^0.48.0",
     "react-dom": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "15.6.1"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",

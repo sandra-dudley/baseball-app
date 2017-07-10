@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import styles from './ChooseDate.css';
+import './ChooseDate.css';
+import logo from '../assets/baseball-calendar.png';
 
 import 'react-datepicker/dist/react-datepicker.css';
  
@@ -18,9 +19,15 @@ class ChooseDate extends Component {
  
   render() {
     return (
-      <div className="calendar-section">
+      <div className="calendar-section row">
+      <div className="col-md-2">
+      <img src={logo} alt="Logo" width="100" height="100"/>
+      </div><div className="col-md-8">
     <h2>Find a baseball game</h2>
-    Between
+    
+    {
+      (this.props.totalEvents === 0) ? "Find a baseball game between" : "Found "+this.props.totalEvents+" games between"
+    }
     <DatePicker
         todayButton={"Today"}
         selected={this.props.startDate}
@@ -43,6 +50,8 @@ class ChooseDate extends Component {
         className="dateField"
         dateFormat="ddd, MMM D, YYYY"
     />
+    </div>
+    <div className="col-md-2">Share</div>
     </div>
     );
   }

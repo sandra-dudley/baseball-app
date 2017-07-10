@@ -12,19 +12,23 @@ Lots of work still need to be done but view current progress at https://sandra-d
 - [x] Choose API
 - [x] Add Date Picker
 - [x] When Date is chose, API search for baseball events from that date and in the next seven days.
-- [ ] If not event, display "no event that week"
-- [ ] Show results in a map
+- [x] If not event, display "no event that week"
+- [x] Show results in a map
 - [ ] User can save/delete their favourite event
--  [ ] Show countdown to their next favourite event
+- [ ] Show countdown to their next favourite event
 - [ ] UI design
 - [ ] Testing components (using Jest?)
 
 
 ## Current component structure
 App (contains the main state variables)
+
 |
+
 |_ChooseDate (form that selects the date)
+
 |_Events (lists all events and has functions)
+
 |_____Event (1 event only)
 
 ## How to install on cloud9
@@ -40,6 +44,15 @@ App (contains the main state variables)
 
 
 ## Added Features
+## Added Features
+
+**10 July 2017**
+- Toggle between map and listing view
+- Fixed date and pagination bugs
+- Layout and UX improvement
+
+**06 July 2017 - Sandra**
+- Added pagination for event listing
 
 **30 June 2017 - Sandra**
 - Layout and UX improvement

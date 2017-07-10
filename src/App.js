@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
+import ToggleViewButton from './components/ToggleViewButton';
+import Pagination from './components/Pagination';
 import moment from 'moment';
-
-import logo from './assets/baseball-calendar.png';
+import './App.css'
 import stadium from './assets/stadium.jpg';
 
 
@@ -11,11 +12,18 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      startDate: moment(),
-      endDate: moment().add(3,"days")
+      startDate: moment().startOf("day"),
+      endDate: moment().add(3,"days").endOf("day"),
+      totalEvents: 0,
+      page:1,
+      mapView: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
+    this.handleTotalEvents = this.handleTotalEvents.bind(this);
+    this.mapVisibility = this.mapVisibility.bind(this);
+    this.changePage = this.changePage.bind(this);
+    this.setPage = this.setPage.bind(this);
   }
  
   handleChange(date) {
@@ -24,22 +32,48 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      startDate: date
+      startDate: moment(date).startOf("day"),
+      page: 1
     });
-    console.log('changed date from App');
+    if (date>this.state.endDate) {
+      
+      this.setState({endDate: moment(date).add(3,"days").endOf("day")});
+      this.handleChangeEnd(moment(date).add(3,"days").endOf("day"))
+    }
   }
-
+  
   handleChangeEnd(date) {
     /*
     ** endDate: when the user wants to search baseball events to
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      endDate: date
+      endDate: moment(date).endOf("day"),
+      page: 1
     });
-    console.log('changed date from App');
   }
   
+  handleTotalEvents (total) {
+    this.setState({
+      totalEvents: total
+    });
+    console.log("total events", total);
+  }
+  
+  changePage(event) {
+    event.preventDefault();
+    this.setState({page: event.target.dataset.pagenum});
+  }
+  
+  setPage(page) {
+    this.setState({page: page});
+  }
+
+  mapVisibility(event) {
+    let setMapView = (event.target.value === "true") ? true : false;
+    this.setState({mapView: setMapView});
+    console.log("show map button", event.target.value)
+  }
   render() {
     const divStyle = {
       backgroundImage: 'url('+stadium+')',
@@ -50,19 +84,41 @@ class App extends Component {
       padding: 0,
       minHeight: '100vh'
     };
+    const style = {
+      width: '800px',
+      height: '400px'
+    };
     return (
+      <div>
       <div className="container-fluid" style={divStyle}>
-        <div><img src={logo} alt="Logo" width="300" height="300"/></div>
+      <nav className="navbar">
+      
         <ChooseDate 
           startDate = {this.state.startDate} 
           handleChange = {this.handleChange}
           endDate = {this.state.endDate} 
           handleChangeEnd = {this.handleChangeEnd}
+          totalEvents = {this.state.totalEvents}
         />
+        </nav>
+        
+        <ToggleViewButton mapView={this.state.mapView} mapVisibility={this.mapVisibility}/>
+        <Pagination 
+          changePage = {this.changePage}
+          page = {this.state.page}
+          totalEvents = {this.state.totalEvents}
+          />
         <Events 
-          fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
-          toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
+          fromDate={this.state.startDate} 
+          toDate={this.state.endDate}
+          handleTotalEvents = {this.handleTotalEvents}
+          totalEvents = {this.state.totalEvents}
+          mapView = {this.state.mapView}
+          setPage = {this.setPage}
+          changePage = {this.changePage}
+          page = {this.state.page}
         />
+      </div>
       </div>
     );
   }

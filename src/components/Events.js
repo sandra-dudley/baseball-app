@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Event from './Event';
 import moment from 'moment';
-import styles from './Events.css';
-var axios = require('axios');
+import SimpleMap from './SimpleMap';
 
+
+var axios = require('axios');
 
 class Events extends Component {
   constructor(props) {
@@ -13,10 +14,11 @@ class Events extends Component {
       this.state = {
         allEvents:'Loading...',
         seatgeek: seatgeek,
-        totalEvents:0,
+        page: 1,
       }      
       this.initialise = this.initialise.bind(this);
-    
+      this.renderMap = this.renderMap.bind(this);
+
   }
   componentDidMount() {
     /*
@@ -32,10 +34,19 @@ class Events extends Component {
 
     if (nextProps.fromDate !== this.props.fromDate 
         || nextProps.toDate !== this.props.toDate) {
-      this.initialise(nextProps.fromDate, nextProps.toDate);   
+          this.props.setPage(1);
+          this.initialise(nextProps.fromDate, nextProps.toDate);   
+          
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.page !== this.props.page) {
+      console.log("time", this.props.fromDate, this.props.toDate)
+      this.initialise(this.props.fromDate, this.props.toDate); 
+      console.log("page changed: ", this.props.page)
+    }
+  }
   initialise (fDate, tDate) {
     /*
     * Connects to api
@@ -45,47 +56,60 @@ class Events extends Component {
     });
     instance.get('',{
       params: {
-        'datetime_utc.gte': fDate,
-        'datetime_utc.lte': tDate
+        'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
+        'datetime_utc.lte': moment(tDate).format('YYYY-MM-DDT23:59:59'),
+        'page': this.props.page
       }
     })
     .then(function (response) {
-
-      console.log(response);
-      this.setState({allEvents:response.data.events, totalEvents: response.data.meta.total});
+      this.setState({allEvents:response.data.events});
+      this.props.handleTotalEvents(response.data.meta.total);
+      console.log("calling API", this.props.page);
     }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
   }
+  renderMap () {
+    console.log("rendering map")
+    const style = {
+      width: '100%',
+      height: '400px',
+    }
+    return(
+      <div style={style} >
+          <SimpleMap allEvents={this.state.allEvents}/>
+        </div>
+      )
+  }
   
-
+  renderListing() {
+    console.log("rendering listing")
+    return(
+      <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
+        {
+      Array.from(this.state.allEvents).map((event, index) => {
+             return (
+              <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
+              )
+          })
+        }
+      </div>
+        )
+  }
   render () {
-
+    
     if(!this.state.allEvents[0]) {
       return <h1  className="event-header">Sorry no result...</h1>;
     }
     return (
 
       <div>
-        <h1 className="event-header">Found {this.state.totalEvents} events </h1>
-        <div style={{color: '#fff'}}>Between {moment(this.props.fromDate).format('ddd, MMM D, YYYY')} and {moment(this.props.toDate).format('ddd, MMM D, YYYY') }</div>
-
-        <ul className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
-          {
-        Array.from(this.state.allEvents).map((event, index) => {
-               return (
-                <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
-                )
-
-            })
-
-
-        }
-        </ul>
+        { (this.props.mapView) ? this.renderMap() : this.renderListing() }
+        
       </div>
     )
   }
 }
 
-export default Events;
+export default Events

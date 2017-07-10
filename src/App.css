@@ -1,24 +1,36 @@
-.App {
-  text-align: center;
+
+
+input[type="radio"] {
+  visibility:hidden;
+  display:none;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  opacity:0.5;
+  border:0;
+}
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  opacity:0.8;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.btn-primary.active {
+  opacity:1;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
-.App-intro {
-  font-size: large;
+#listButton:before {
+  content: '\f009';
+  font-family: var(--icon-font);
+  margin-right:0.5em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#mapButton:before {
+  content: '\f0ac';
+  font-family: var(--icon-font);
+  margin-right:0.5em;
 }
