@@ -36,11 +36,13 @@ class Events extends Component {
         || nextProps.toDate !== this.props.toDate) {
           this.props.setPage(1);
           this.initialise(nextProps.fromDate, nextProps.toDate);   
+          
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.page !== this.props.page) {
+      console.log("time", this.props.fromDate, this.props.toDate)
       this.initialise(this.props.fromDate, this.props.toDate); 
       console.log("page changed: ", this.props.page)
     }
@@ -54,8 +56,8 @@ class Events extends Component {
     });
     instance.get('',{
       params: {
-        'datetime_utc.gte': fDate,
-        'datetime_utc.lte': tDate,
+        'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
+        'datetime_utc.lte': moment(tDate).format('YYYY-MM-DDT23:59:59'),
         'page': this.props.page
       }
     })

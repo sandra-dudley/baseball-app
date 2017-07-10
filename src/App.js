@@ -12,8 +12,8 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      startDate: moment(),
-      endDate: moment().add(3,"days"),
+      startDate: moment().startOf("day"),
+      endDate: moment().add(3,"days").endOf("day"),
       totalEvents: 0,
       page:1,
       mapView: false
@@ -32,13 +32,13 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      startDate: date,
+      startDate: moment(date).startOf("day"),
       page: 1
     });
     if (date>this.state.endDate) {
       
-      this.setState({endDate: moment(date).add(3,"days")});
-      this.handleChangeEnd(moment(date).add(3,"days"))
+      this.setState({endDate: moment(date).add(3,"days").endOf("day")});
+      this.handleChangeEnd(moment(date).add(3,"days").endOf("day"))
     }
   }
   
@@ -48,7 +48,7 @@ class App extends Component {
     ** This function is called from child component ChooseDate
     */
     this.setState({
-      endDate: date,
+      endDate: moment(date).endOf("day"),
       page: 1
     });
   }
@@ -61,7 +61,6 @@ class App extends Component {
   }
   
   changePage(event) {
-    console.log("change page",event,event.target.dataset.pagenum);
     event.preventDefault();
     this.setState({page: event.target.dataset.pagenum});
   }
@@ -110,8 +109,8 @@ class App extends Component {
           totalEvents = {this.state.totalEvents}
           />
         <Events 
-          fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
-          toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
+          fromDate={this.state.startDate} 
+          toDate={this.state.endDate}
           handleTotalEvents = {this.handleTotalEvents}
           totalEvents = {this.state.totalEvents}
           mapView = {this.state.mapView}

@@ -15,7 +15,6 @@ class EventContent extends Component {
     const venue = this.props.event.venue ? this.props.event.venue : 'loading...';
     const time = moment(event.datetime_local).format('llll');
     const city = (typeof event === "object") ? ", "+event.venue.city : ''
-    console.log(event);
     return(
         <div>
         <h3>{this.props.event.short_title}</h3>
