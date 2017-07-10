@@ -84,7 +84,7 @@ class SimpleMap extends Component {
   render() {
     
     return ( 
-      <div>
+      <div style= {{marginTop:"1em"}}>
       
       <Map 
         google={this.props.google} 
