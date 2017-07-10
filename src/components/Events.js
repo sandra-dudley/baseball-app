@@ -14,12 +14,10 @@ class Events extends Component {
       this.state = {
         allEvents:'Loading...',
         seatgeek: seatgeek,
-        totalEvents:0,
         page: 1,
       }      
       this.initialise = this.initialise.bind(this);
       this.pageNumber = this.pageNumber.bind(this);
-      this.changePage = this.changePage.bind(this);
       this.renderMap = this.renderMap.bind(this);
 
   }
@@ -37,7 +35,7 @@ class Events extends Component {
 
     if (nextProps.fromDate !== this.props.fromDate 
         || nextProps.toDate !== this.props.toDate) {
-          this.setState({page: 1});
+          this.props.setPage(1);
       this.initialise(nextProps.fromDate, nextProps.toDate);   
     }
   }
@@ -58,11 +56,11 @@ class Events extends Component {
       params: {
         'datetime_utc.gte': fDate,
         'datetime_utc.lte': tDate,
-        'page': this.state.page
+        'page': this.props.page
       }
     })
     .then(function (response) {
-      this.setState({allEvents:response.data.events, totalEvents: response.data.meta.total});
+      this.setState({allEvents:response.data.events});
       this.props.handleTotalEvents(response.data.meta.total);
       this.pageNumber();
     }.bind(this))
@@ -73,21 +71,32 @@ class Events extends Component {
   
   pageNumber () {
     var totalPages;
-    if (this.state.totalEvents > 24) {
-      totalPages = Math.round(this.state.totalEvents/24);
+    if (this.props.totalEvents > 24) {
+      totalPages = Math.round(this.props.totalEvents/24);
     }
     var pagination = [];
     for (var i = 0; i < totalPages; i ++) {
-      pagination.push(<a href='#' onClick={this.changePage} key = {i+11} data-pageNum = {i+1} style={{padding:0.2+'em', background: '#fff', borderRadius: 3+"px", marginRight: 0.5+'em'}}>{i+1}</a>);
+      pagination.push(
+        <a href='#' 
+          onClick={this.props.changePage} 
+          key = {i+11} 
+          data-pageNum = {i+1} 
+          style={{
+            padding:0.2+'em', 
+            background: '#fff', 
+            borderRadius: 3+"px", 
+            marginRight: 0.5+'em'
+          }}
+        >
+        {i+1}
+        </a>
+      );
     }
     
     return pagination;
   }
 
-  changePage(event) {
-    event.preventDefault();
-    this.setState({page: event.target.dataset.pagenum});
-  }
+
   
   renderMap () {
     console.log("rendering map")
@@ -124,7 +133,7 @@ class Events extends Component {
     return (
 
       <div>
-        { this.pageNumber()}
+        { this.pageNumber() }
         { (this.props.mapView) ? this.renderMap() : this.renderListing() }
         
       </div>

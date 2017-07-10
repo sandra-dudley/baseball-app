@@ -14,12 +14,15 @@ class App extends Component {
       startDate: moment(),
       endDate: moment().add(3,"days"),
       totalEvents: 0,
+      page:1,
       mapView: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleTotalEvents = this.handleTotalEvents.bind(this);
-    this.mapVisibility = this.mapVisibility.bind(this)
+    this.mapVisibility = this.mapVisibility.bind(this);
+    this.changePage = this.changePage.bind(this);
+    this.setPage = this.setPage.bind(this);
   }
  
   handleChange(date) {
@@ -54,6 +57,15 @@ class App extends Component {
       totalEvents: total
     });
     console.log("total events", total);
+  }
+  
+  changePage(event) {
+    event.preventDefault();
+    this.setState({page: event.target.dataset.pagenum});
+  }
+  
+  setPage(page) {
+    this.setState({page: page});
   }
 
   mapVisibility(event) {
@@ -95,7 +107,11 @@ class App extends Component {
           fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
           toDate={moment(this.state.endDate).format('YYYY-MM-DD')}
           handleTotalEvents = {this.handleTotalEvents}
+          totalEvents = {this.state.totalEvents}
           mapView = {this.state.mapView}
+          setPage = {this.setPage}
+          changePage = {this.changePage}
+          page = {this.state.page}
         />
       </div>
       </div>
