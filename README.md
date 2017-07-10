@@ -1,8 +1,7 @@
 ## Info
 
-- Free API from seatgeek.com
+- API from seatgeek.com
 - Date Picker from react-datepicker (includes moment)
-- [Free API from Google Map](https://developers.google.com/maps/)
 
 ## Features
 
@@ -19,9 +18,13 @@
 
 ## Current component structure
 App (contains the main state variables)
+
 |
+
 |_ChooseDate (form that selects the date)
+
 |_Events (lists all events and has functions)
+
 |_____Event (1 event only)
 
 ## How to install on cloud9
@@ -36,6 +39,7 @@ App (contains the main state variables)
 - start the server with `npm start`
 
 
+## Added Features
 ## Added Features
 
 **10 July 2017**
