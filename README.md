@@ -1,5 +1,5 @@
-## First deploy 02/07/2017
-Lots of work still need to be done but view current progress at https://sandra-dudley.github.io/baseball-app/
+## v2 10/07/2017 (First deploy 02/07/2017)
+Work in progress at https://sandra-dudley.github.io/baseball-app/
 
 
 ## Info
