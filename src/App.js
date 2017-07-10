@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
 import ToggleViewButton from './components/ToggleViewButton';
+import Pagination from './components/Pagination';
 import moment from 'moment';
 import './App.css'
 import stadium from './assets/stadium.jpg';
@@ -60,6 +61,7 @@ class App extends Component {
   }
   
   changePage(event) {
+    console.log("change page",event,event.target.dataset.pagenum);
     event.preventDefault();
     this.setState({page: event.target.dataset.pagenum});
   }
@@ -102,7 +104,11 @@ class App extends Component {
         </nav>
         
         <ToggleViewButton mapView={this.state.mapView} mapVisibility={this.mapVisibility}/>
-        
+        <Pagination 
+          changePage = {this.changePage}
+          page = {this.state.page}
+          totalEvents = {this.state.totalEvents}
+          />
         <Events 
           fromDate={moment(this.state.startDate).format('YYYY-MM-DD')} 
           toDate={moment(this.state.endDate).format('YYYY-MM-DD')}

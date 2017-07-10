@@ -17,7 +17,6 @@ class Events extends Component {
         page: 1,
       }      
       this.initialise = this.initialise.bind(this);
-      this.pageNumber = this.pageNumber.bind(this);
       this.renderMap = this.renderMap.bind(this);
 
   }
@@ -36,15 +35,16 @@ class Events extends Component {
     if (nextProps.fromDate !== this.props.fromDate 
         || nextProps.toDate !== this.props.toDate) {
           this.props.setPage(1);
-      this.initialise(nextProps.fromDate, nextProps.toDate);   
-    }
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.page !== this.state.page) {
-      this.initialise(this.props.fromDate, this.props.toDate); 
+          this.initialise(nextProps.fromDate, nextProps.toDate);   
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.page !== this.props.page) {
+      this.initialise(this.props.fromDate, this.props.toDate); 
+      console.log("page changed: ", this.props.page)
+    }
+  }
   initialise (fDate, tDate) {
     /*
     * Connects to api
@@ -62,42 +62,12 @@ class Events extends Component {
     .then(function (response) {
       this.setState({allEvents:response.data.events});
       this.props.handleTotalEvents(response.data.meta.total);
-      this.pageNumber();
+      console.log("calling API", this.props.page);
     }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
   }
-  
-  pageNumber () {
-    var totalPages;
-    if (this.props.totalEvents > 24) {
-      totalPages = Math.round(this.props.totalEvents/24);
-    }
-    var pagination = [];
-    for (var i = 0; i < totalPages; i ++) {
-      pagination.push(
-        <a href='#' 
-          onClick={this.props.changePage} 
-          key = {i+11} 
-          data-pageNum = {i+1} 
-          style={{
-            padding:0.2+'em', 
-            background: '#fff', 
-            borderRadius: 3+"px", 
-            marginRight: 0.5+'em'
-          }}
-        >
-        {i+1}
-        </a>
-      );
-    }
-    
-    return pagination;
-  }
-
-
-  
   renderMap () {
     console.log("rendering map")
     const style = {
@@ -133,7 +103,6 @@ class Events extends Component {
     return (
 
       <div>
-        { this.pageNumber() }
         { (this.props.mapView) ? this.renderMap() : this.renderListing() }
         
       </div>
