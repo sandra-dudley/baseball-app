@@ -14,14 +14,15 @@ class EventContent extends Component {
     const event = this.props.event;    
     const venue = this.props.event.venue ? this.props.event.venue : 'loading...';
     const time = moment(event.datetime_local).format('llll');
-
+    const city = (typeof event === "object") ? ", "+event.venue.city : ''
+    console.log(event);
     return(
         <div>
         <h3>{this.props.event.short_title}</h3>
         <p className="text-muted event-time">
           {time}</p>
         <p className="text-muted event-venue-name">
-          {venue.name}
+          {venue.name}{city}
         </p>
         <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a></p>
         </div>
