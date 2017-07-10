@@ -3,41 +3,46 @@ import React, { Component } from 'react';
 class Pagination extends Component {
   constructor(props) {
       super(props);
-      
+      this.state = {
+        currentPage: 1
+      }
       this.pageNumber = this.pageNumber.bind(this)
   }
   
-  
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.page !== this.props.page) {
+      
+      this.setState({currentPage: this.props.page})
+      this.pageNumber();
+      console.log("Updated")
+    }
+  }
   pageNumber () {
-    var totalPages;
+    let totalPages;
     if (this.props.totalEvents > 24) {
       totalPages = Math.round(this.props.totalEvents/24);
     }
-    var pagination = [];
-    for (var i = 0; i < totalPages; i ++) {
+    let pagination = [];
+    for (let i = 0; i < totalPages; i ++) {
+      let isActive = (this.props.page == i+1);
       pagination.push(
-        <a href='#' 
+        <button
+          type="button"
+          className={(isActive)? "btn": "btn btn-secondary"}
           onClick={this.props.changePage} 
-          key = {i+11} 
+          key = {i+1} 
           data-pageNum = {i+1} 
-          style={{
-            padding:0.2+'em', 
-            background: '#fff', 
-            borderRadius: 3+"px", 
-            marginRight: 0.5+'em'
-          }}
         >
         {i+1}
-        </a>
+        </button>
       );
     }
-    
     return pagination;
   }
   
   render() {
     return ( 
-      <div> 
+      <div className="btn-group" role="group" aria-label="Pagination"> 
         {this.pageNumber()}
       </div> 
     );
