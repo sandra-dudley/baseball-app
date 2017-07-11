@@ -16,7 +16,8 @@ class App extends Component {
       endDate: moment().add(3,"days").endOf("day"),
       totalEvents: 0,
       page:1,
-      mapView: false
+      mapView: false,
+      localStorage: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -26,6 +27,15 @@ class App extends Component {
     this.setPage = this.setPage.bind(this);
   }
  
+ componentDidMount() {
+   if (typeof(Storage) !== "undefined") {
+    if (!localStorage.getItem('baseballApp')) {
+      localStorage.setItem('baseballApp', '')
+    }
+} else {
+    this.setState({localStorage: false});
+}
+ }
   handleChange(date) {
     /*
     ** startDate: from when the user wants to search baseball events from
@@ -117,6 +127,7 @@ class App extends Component {
           setPage = {this.setPage}
           changePage = {this.changePage}
           page = {this.state.page}
+          localStorage = {this.state.localStorage}
         />
       </div>
       </div>

@@ -78,7 +78,7 @@ class Events extends Component {
     }
     return(
       <div style={style} >
-          <SimpleMap allEvents={this.state.allEvents}/>
+          <SimpleMap allEvents={this.state.allEvents} localStorage = {this.props.localStorage}/>
         </div>
       )
   }
@@ -90,7 +90,7 @@ class Events extends Component {
         {
       Array.from(this.state.allEvents).map((event, index) => {
              return (
-              <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} />
+              <Event event={event} date={moment(event.datetime_local).format('DD MMMM YYYY')} key={index} localStorage = {this.props.localStorage}/>
               )
           })
         }

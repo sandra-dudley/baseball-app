@@ -73,7 +73,7 @@ class SimpleMap extends Component {
   }
   renderInfoWindow() {
     if (this.state.selectedPlace.event) {
-      let markerEvent = <EventContent event={this.state.selectedPlace.event} />
+      let markerEvent = <EventContent event={this.state.selectedPlace.event} localStorage = {this.props.localStorage} />
         return markerEvent;
     }
   }

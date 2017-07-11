@@ -18,7 +18,7 @@ class Event extends Component {
 
     return(
       <div className = "col-md-3 event-card">
-          <EventContent event={this.props.event} />
+          <EventContent event={this.props.event} localStorage = {this.props.localStorage}/>
       </div>
       )
   }
