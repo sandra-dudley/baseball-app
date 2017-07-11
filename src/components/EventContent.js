@@ -5,11 +5,13 @@ import './Events.css';
 class EventContent extends Component {
   constructor(props) {
       super(props);
-      this.init = this.init.bind(this)
+      this.displayStar = this.displayStar.bind(this);
   }
-  init() {
-    console.log(this.props.date)
+  displayStar() {
+    var star = <button className="btn " ><i className="fa fa-star-o" aria-hidden="true"></i></button>
+    return star;
   }
+  
   render () {
     const event = this.props.event;    
     const venue = this.props.event.venue ? this.props.event.venue : 'loading...';
@@ -23,7 +25,8 @@ class EventContent extends Component {
         <p className="text-muted event-venue-name">
           {venue.name}{city}
         </p>
-        <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a></p>
+        <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a>&nbsp; 
+        {(this.props.localStorage) ?  this.displayStar() : ''}</p>
         </div>
       )
   }
