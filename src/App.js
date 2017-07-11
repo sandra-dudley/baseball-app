@@ -30,7 +30,7 @@ class App extends Component {
  componentDidMount() {
    if (typeof(Storage) !== "undefined") {
     if (!localStorage.getItem('baseballApp')) {
-      localStorage.setItem('baseballApp', '')
+      localStorage.setItem('baseballApp', '[]')
     }
 } else {
     this.setState({localStorage: false});
