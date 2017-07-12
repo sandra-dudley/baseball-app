@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./ToggleViewButton.css";
 
 class ToggleViewButton extends Component {
   constructor(props) {
