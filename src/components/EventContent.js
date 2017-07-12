@@ -5,11 +5,17 @@ import './Events.css';
 class EventContent extends Component {
   constructor(props) {
       super(props);
+      this.state = {
+        test: false
+      }
       this.displayStar = this.displayStar.bind(this);
       this.toggle = this.toggle.bind(this);
   }
   displayStar() {
-    var star = <button className="btn" onClick={this.toggle}><i className="fa fa-star-o" aria-hidden="true"></i></button>
+    
+    var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
+    var initClass = (currStorage.indexOf(this.props.event.id) > -1 ) ? "btn btn-primary" : "btn";
+    var star = <button className={initClass} onClick={this.toggle}><i className="fa fa-star-o" aria-hidden="true"></i></button>
     return star;
   }
   toggle(event) {
