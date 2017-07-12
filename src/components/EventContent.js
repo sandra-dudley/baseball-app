@@ -6,16 +6,27 @@ class EventContent extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        test: false
+        id: "event"+this.props.event.id
       }
       this.displayStar = this.displayStar.bind(this);
       this.toggle = this.toggle.bind(this);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.event.id !== this.props.event.id) {
+    this.setState({id: "event"+this.props.event.id})
+    }
+  }
   displayStar() {
-    
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
-    var initClass = (currStorage.indexOf(this.props.event.id) > -1 ) ? "btn btn-primary" : "btn";
-    var star = <button className={initClass} onClick={this.toggle}><i className="fa fa-star-o" aria-hidden="true"></i></button>
+    var isFav = currStorage.indexOf(this.props.event.id) > -1;
+    var initClass = (isFav) ? "btn btn-primary" : "btn";
+    var initStar = (isFav) ? "fa fa-star" : "fa fa-star-o";
+    var star = <button 
+      id={this.state.id} 
+      className={initClass} 
+      onClick={this.toggle}>
+        <i className={initStar} aria-hidden="true"></i>
+    </button>;
     return star;
   }
   toggle(event) {
@@ -46,7 +57,10 @@ class EventContent extends Component {
         <p className="text-muted event-venue-name">
           {venue.name}{city}
         </p>
-        <p><a className="btn btn-primary" href={this.props.event.url} target="_blank">Get ticket</a>&nbsp; 
+        <p>
+        <a className="btn btn-primary" href={this.props.event.url} target="_blank">
+          Get ticket
+        </a>&nbsp; 
         {(this.props.localStorage) ?  this.displayStar() : ''}</p>
         </div>
       )
