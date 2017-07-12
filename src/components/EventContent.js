@@ -6,8 +6,8 @@ class EventContent extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        id: '',
-        starId: ''
+        id: "event"+this.props.event.id,
+        starId: "star"+this.props.event.id
       }
       this.displayStar = this.displayStar.bind(this);
       this.toggle = this.toggle.bind(this);
@@ -15,13 +15,14 @@ class EventContent extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.event.id !== this.props.event.id) {
     this.setState({id: "event"+this.props.event.id, starId: "star"+this.props.event.id})
+    console.log("id", this.props.event.id);
     }
   }
   displayStar() {
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
     var isFav = currStorage.indexOf(this.props.event.id) > -1;
     var initClass = (isFav) ? "btn btn-primary" : "btn";
-    var initStar = (isFav) ? "fa fa-star" : "fa fa-star-o";
+    var initStar = (isFav) ? "fa fa-star" : "fa fa-star-o"
     var star = <button 
       id={this.state.id} 
       className={initClass} 
@@ -31,6 +32,7 @@ class EventContent extends Component {
     return star;
   }
   toggle(event) {
+    console.log("click");
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
     if (document.getElementById("event"+this.props.event.id).classList.contains("btn-primary")) {
       document.getElementById("event"+this.props.event.id).classList.remove("btn-primary");

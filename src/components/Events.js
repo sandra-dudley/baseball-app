@@ -46,6 +46,7 @@ class Events extends Component {
       this.initialise(this.props.fromDate, this.props.toDate); 
       console.log("page changed: ", this.props.page)
     }
+
   }
   initialise (fDate, tDate) {
     /*
@@ -64,14 +65,15 @@ class Events extends Component {
     .then(function (response) {
       this.setState({allEvents:response.data.events});
       this.props.handleTotalEvents(response.data.meta.total);
-      console.log("calling API", this.props.page);
+      console.log("calling API", this.state.allEvents);
     }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
   }
+  
   renderMap () {
-    console.log("rendering map")
+    console.log("rendering map", this.state.allEvents)
     const style = {
       width: '100%',
       height: '400px',
@@ -84,7 +86,7 @@ class Events extends Component {
   }
   
   renderListing() {
-    console.log("rendering listing")
+    console.log("rendering listing", this.state.allEvents)
     return(
       <div className="d-flex flex-wrap justify-content-center" style={{paddingLeft:0,marginBottom:0}}>
         {

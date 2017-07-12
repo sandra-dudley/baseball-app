@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import Marker from './Marker';
+import icon from '../assets/baseball-marker.svg';
+import iconFav from '../assets/star.svg';
 import Event from './Event';
 import EventContent from './EventContent';
 import moment from 'moment';
@@ -35,6 +37,8 @@ class SimpleMap extends Component {
       showingInfoWindow: true,
     });
     
+    ReactDOM.render(<EventContent event={props.event} localStorage = {this.props.localStorage} />, document.getElementById("infoWdw"));
+    
   }
   
   onMapClicked(props) {
@@ -48,13 +52,18 @@ class SimpleMap extends Component {
   
   renderMarkers() {
     var listing = [];
+    var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
     if (this.props.allEvents && typeof this.props.allEvents === "object") {
     Array.from(this.props.allEvents).map((event,index) => {
+      var isFav = currStorage.indexOf(event.id) > -1;
+      console.log(event.id, isFav)
+      let eventIcon = (isFav) ? iconFav : icon;
       listing.push(
         <Marker 
           name={event.title}
           position={{lat: event.venue.location.lat, lng: event.venue.location.lon}} 
           onClick={this.onMarkerClick}
+          icon={(isFav) ? iconFav : icon}
           event = {event}
           key = {index}
         />
@@ -64,8 +73,8 @@ class SimpleMap extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
           key={this.props.allEvents.length}>
-            <div>
-              {this.renderInfoWindow()}
+            <div id="infoWdw">
+              
             </div>
         </InfoWindow>)
     return listing;
