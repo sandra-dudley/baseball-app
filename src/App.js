@@ -18,6 +18,7 @@ class App extends Component {
       page:1,
       mapView: false,
       localStorage: true,
+      favToggle: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -25,6 +26,7 @@ class App extends Component {
     this.mapVisibility = this.mapVisibility.bind(this);
     this.changePage = this.changePage.bind(this);
     this.setPage = this.setPage.bind(this);
+    this.handleFavChange = this.handleFavChange.bind(this);
   }
  
  componentDidMount() {
@@ -84,6 +86,17 @@ class App extends Component {
     this.setState({mapView: setMapView});
     console.log("show map button", event.target.value)
   }
+  
+  handleFavChange(event) {
+    const target = event.target;
+    const value = target.checked;
+    this.setState({
+      favToggle: value
+    });
+    console.log(target.checked)
+  }
+  
+  
   render() {
     const divStyle = {
       backgroundImage: 'url('+stadium+')',
@@ -113,6 +126,16 @@ class App extends Component {
         </nav>
         
         <ToggleViewButton mapView={this.state.mapView} mapVisibility={this.mapVisibility}/>
+        <form>
+          <label>
+            <input
+              name="favouriteToggle"
+              type="checkbox"
+              checked={this.state.favToggle}
+              onChange={this.handleFavChange} />
+              Only show favourites
+          </label>
+        </form>
         <Pagination 
           changePage = {this.changePage}
           page = {this.state.page}
