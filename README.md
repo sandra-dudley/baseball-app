@@ -40,7 +40,9 @@ App (contains the main state variables)
 
 
 ## Added Features
-## Added Features
+
+**24 July 2017**
+- Added localStorage
 
 **10 July 2017**
 - Toggle between map and listing view
