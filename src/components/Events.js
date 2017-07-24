@@ -41,7 +41,7 @@ class Events extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.page !== this.props.page) {
+    if (prevProps.page !== this.props.page || prevProps.favToggle !== this.props.favToggle) {
       console.log("time", this.props.fromDate, this.props.toDate)
       this.initialise(this.props.fromDate, this.props.toDate); 
       console.log("page changed: ", this.props.page)
@@ -52,15 +52,22 @@ class Events extends Component {
     /*
     * Connects to api
     */
+    let dateParams = {
+        'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
+        'datetime_utc.lte': moment(tDate).format('YYYY-MM-DDT23:59:59'),
+        'page': this.props.page
+      };
+    var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
+    let favParams = {
+      'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
+      'id': currStorage.join(','),
+      'page': this.props.page
+    }
     var instance = axios.create({
       baseURL: this.state.seatgeek
     });
     instance.get('',{
-      params: {
-        'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
-        'datetime_utc.lte': moment(tDate).format('YYYY-MM-DDT23:59:59'),
-        'page': this.props.page
-      }
+      params: this.props.favToggle ? favParams : dateParams
     })
     .then(function (response) {
       this.setState({allEvents:response.data.events});

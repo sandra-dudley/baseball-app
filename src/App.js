@@ -151,6 +151,7 @@ class App extends Component {
           changePage = {this.changePage}
           page = {this.state.page}
           localStorage = {this.state.localStorage}
+          favToggle = {this.state.favToggle}
         />
       </div>
       </div>
