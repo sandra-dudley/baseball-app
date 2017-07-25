@@ -20,7 +20,7 @@ class EventContent extends Component {
   }
   displayStar() {
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
-    var isFav = currStorage.indexOf(this.props.event.id) > -1;
+    var isFav = (currStorage === null) ? false : currStorage.indexOf(this.props.event.id) > -1;
     var initClass = (isFav) ? "btn btn-primary" : "btn";
     var initStar = (isFav) ? "fa fa-star" : "fa fa-star-o"
     var star = <button 

@@ -58,6 +58,7 @@ class Events extends Component {
         'page': this.props.page
       };
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
+    currStorage = (currStorage === null) ? [] : currStorage;
     let favParams = {
       'datetime_utc.gte': moment(fDate).format('YYYY-MM-DDT00:00:00'),
       'id': currStorage.join(','),
