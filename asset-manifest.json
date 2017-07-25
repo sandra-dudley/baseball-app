@@ -1,8 +1,10 @@
 {
-  "main.css": "static/css/main.df3122b1.css",
-  "main.css.map": "static/css/main.df3122b1.css.map",
-  "main.js": "static/js/main.d3ef1e2a.js",
-  "main.js.map": "static/js/main.d3ef1e2a.js.map",
+  "main.css": "static/css/main.29918782.css",
+  "main.css.map": "static/css/main.29918782.css.map",
+  "main.js": "static/js/main.d151aab3.js",
+  "main.js.map": "static/js/main.d151aab3.js.map",
   "static/media/baseball-calendar.png": "static/media/baseball-calendar.322ba427.png",
-  "static/media/stadium.jpg": "static/media/stadium.5f128635.jpg"
+  "static/media/baseball-marker.svg": "static/media/baseball-marker.8af896e8.svg",
+  "static/media/stadium.jpg": "static/media/stadium.5f128635.jpg",
+  "static/media/star.svg": "static/media/star.f90796b4.svg"
 }
