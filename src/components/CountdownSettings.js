@@ -25,7 +25,8 @@ class CountdownSettings extends Component {
     * Connects to api
     */
     var currStorage = JSON.parse(localStorage.getItem('baseballApp'));
-    if (currStorage === null) return;
+    currStorage = (currStorage === null) ? [] : currStorage;
+    
     let favParams = {
       'id': currStorage.join(','),
     }
@@ -39,6 +40,7 @@ class CountdownSettings extends Component {
       this.setState({
         allEvents: response.data.events, 
         eventDate: response.data.events[0].datetime_utc,
+        hasLoaded: true
       });
     }.bind(this))
     .catch(function (error) {
@@ -49,19 +51,19 @@ class CountdownSettings extends Component {
   render () {
     let card = null;
     if (this.state.hasLoaded) {
-      card = "hello"
+      card = <div className="card mb-5">
+                <div className="card-block">
+                  <h4>Your next event {card}</h4>
+                  <h5>{ this.state.allEvents[0].title }</h5>
+                  <h5><Countdown dateTo = {this.state.eventDate } /></h5>
+                </div>
+              </div>
     } else {
       card = ''
     }
 
     return (
-      <div className="card mb-5">
-        <div className="card-block">
-          <h4>Your next event {card}</h4>
-          <h5>{ this.state.allEvents[0].title }</h5>
-          <h5><Countdown dateTo = {this.state.eventDate } /></h5>
-        </div>
-      </div>
+      <div>{card}</div>
     )
   }
 }
