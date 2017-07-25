@@ -36,7 +36,7 @@ class CountdownSettings extends Component {
     .then(function (response) {
       this.setState({
         allEvents: response.data.events, 
-        eventDate: response.data.events[0].datetime_local,
+        eventDate: response.data.events[0].datetime_utc,
       });
     }.bind(this))
     .catch(function (error) {
@@ -46,9 +46,12 @@ class CountdownSettings extends Component {
   
   render () {
     return (
-      <div>
-        { this.state.allEvents[0].title } { JSON.stringify(this.state.allEvents[0].datetime_local) } {this.state.eventDate}
-        <Countdown dateTo = {this.state.eventDate } />
+      <div className="card mb-5">
+        <div className="card-block">
+          <h4>Your next event</h4>
+          <h5>{ this.state.allEvents[0].title }</h5>
+          <h5><Countdown dateTo = {this.state.eventDate } /></h5>
+        </div>
       </div>
     )
   }
