@@ -3,6 +3,7 @@ import Events from './components/Events';
 import ChooseDate from './components/ChooseDate';
 import ToggleViewButton from './components/ToggleViewButton';
 import Pagination from './components/Pagination';
+import CountdownSettings from './components/CountdownSettings';
 import moment from 'moment';
 import './App.css'
 import stadium from './assets/stadium.jpg';
@@ -136,6 +137,7 @@ class App extends Component {
               Only show favourites
           </label>
         </form>
+        <CountdownSettings />
         <Pagination 
           changePage = {this.changePage}
           page = {this.state.page}
