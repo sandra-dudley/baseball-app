@@ -112,6 +112,7 @@ class App extends Component {
       width: '800px',
       height: '400px'
     };
+    
     return (
       <div>
       <div className="container-fluid" style={divStyle}>
